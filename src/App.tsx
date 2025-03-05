@@ -12,7 +12,11 @@ function App() {
     youtube: { name: 'YouTube', icon: Youtube, color: 'bg-red-500' },
     facebook: { name: 'Facebook', icon: Facebook, color: 'bg-blue-600' },
     instagram: { name: 'Instagram', icon: Instagram, color: 'bg-pink-600' }
+    
   };
+
+  
+
 
   const faqs = [
     {
@@ -43,25 +47,23 @@ function App() {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:3000/api/download', {
-        url,
-        platform: activeTab
-      });
+        const response = await axios.post('http://localhost:3000/api/download', { url, platform: activeTab });
 
-      // Create a temporary anchor element to trigger the download
-      const link = document.createElement('a');
-      link.href = response.data.downloadUrl;
-      link.download = `${response.data.title}.mp4`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+        // Trigger file download
+        const link = document.createElement('a');
+        link.href = response.data.downloadUrl;
+        link.download = `${response.data.title}.mp4`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     } catch (err) {
-      setError('Failed to download video. Please check the URL and try again.');
-      console.error('Download error:', err);
+        setError('Failed to download video. Please check the URL and try again.');
+        console.error('Download error:', err);
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+};
+
 
   return (
 
