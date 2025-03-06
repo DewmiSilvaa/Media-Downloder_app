@@ -1,6 +1,5 @@
 import express from 'express';
 import ytdl from 'ytdl-core';
-// @ts-ignore
 import fbDownloader from 'fb-downloader';
 import instagramGetUrl from 'instagram-url-direct';
 
